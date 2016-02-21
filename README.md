@@ -4,7 +4,7 @@ This is an infinite photos play framework
 
 #### 效果演示
 
-[](./SJIniteScrollView.gif)
+![](SJIniteScrollView.gif)
 
 #### 基本用法
 
