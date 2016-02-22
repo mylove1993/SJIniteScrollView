@@ -9,5 +9,6 @@ Pod::Spec.new do |s|
   s.social_media_url   = "http://weibo.com/CoderKing"
   s.source       = { :git => "https://github.com/king129/SJIniteScrollView.git", :tag => s.version }
   s.source_files  = "SJIniteScrollView"
+  s.resource = "SJIniteScrollView/SJIniteScrollView.bundle"
   s.requires_arc = true
 end
