@@ -48,7 +48,7 @@ This is an infinite photos play framework [前往Swift版](https://github.com/ki
 
 ### 安装
 
-- CocoaPods集成
+- CocoaPods集成 0.1 版本不支持代理和网络图片
 
 ``` objective-c
 pod 'SJIniteScrollView'
