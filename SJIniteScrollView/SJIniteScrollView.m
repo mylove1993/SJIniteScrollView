@@ -15,6 +15,8 @@
 @property (nonatomic, weak) NSTimer *timer;
 
 @property (nonatomic, assign) void(^MyBlock)(NSInteger);
+@property (nonatomic, assign) void(^loadBlock)(UIImageView *, NSURL *);
+
 @end
 
 @implementation SJIniteScrollView
@@ -129,11 +131,25 @@
         }
         // 处理特殊情况
         if (index == -1) {
-            index = self.images.count - 1;
-        } else if (index == self.images.count) {
+            if (self.images) {
+                index = self.images.count - 1;
+            } else if (self.imagesUrl) {
+                index = self.imagesUrl.count - 1;
+            }
+        } else if (index == self.images.count || index == self.imagesUrl.count) {
             index = 0;
         }
-        imageView.image = self.images[index];
+        if (self.images) {
+            imageView.image = self.images[index];
+        } else if (self.imagesUrl) {
+            NSURL *url = [NSURL URLWithString:self.imagesUrl[index]];
+            if ([self.delegate respondsToSelector:@selector(initeScrollView:loadImage:imageUrl:)]) {
+                [self.delegate initeScrollView:self loadImage:imageView imageUrl:url];
+            }
+            if (self.loadBlock) {
+                self.loadBlock(imageView, url);
+            }
+        }
         imageView.tag = index;
     }
     // 重置scrollView.contentOffset.x / y == 1倍宽度/高度
@@ -147,13 +163,20 @@
 #pragma mark  图片点击处理
 - (void)imageViewClick:(UITapGestureRecognizer *)tap {
     
+    if ([self.delegate respondsToSelector:@selector(initeScrollView:didSelectItemIndex:)]) {
+        [self.delegate initeScrollView:self didSelectItemIndex:tap.view.tag];
+    }
+    
     if (self.MyBlock) {
         self.MyBlock(tap.view.tag);
     }
 }
-- (void)didSelectItemIndex:(didSelectBlock)SelectBlock {
+- (void)didSelectItemIndex:(void (^)(NSInteger))SelectBlock {
     
     self.MyBlock = SelectBlock;
+}
+- (void)loadImage:(void (^)(UIImageView *, NSURL *))Block {
+    self.loadBlock = Block;
 }
 #pragma mark ------------------------------------
 #pragma mark  定时器处理
