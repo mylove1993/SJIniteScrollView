@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SJIniteScrollView"
-  s.version      = "0.1"
+  s.version      = "0.2"
   s.ios.deployment_target = '6.0'
   s.summary      = "无限图片轮播器,支持本地及网络加载"
   s.homepage     = "https://github.com/king129/SJIniteScrollView"
