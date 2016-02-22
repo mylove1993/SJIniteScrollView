@@ -110,7 +110,7 @@
 #pragma mark ------------------------------------
 #pragma mark  更新内容
 /**
- *  更新所有UIImageView的内容，并且重置scrollView.contentOffset.x == 1倍宽度
+ *  更新所有UIImageView的内容，并且重置scrollView.contentOffset.x/y == 1倍宽度/高度
  */
 - (void)updateCoenten {
    
